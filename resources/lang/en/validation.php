@@ -106,7 +106,7 @@ return [
         ],
     ],
     'attributes'           => [],
-    'site_title'           => 'Laravel + AdminLTE3',
+    'site_title'           => 'Sharon CRM',
     'userManagement'       => [
         'title'          => 'User Management',
         'title_singular' => 'User Management',
