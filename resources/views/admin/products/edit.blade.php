@@ -27,7 +27,7 @@
                 <textarea id="description" name="description" class="form-control ">{{ old('description', isset($product) ? $product->description : '') }}</textarea>
                 @if($errors->has('description'))
                     <p class="help-block">
-                        {{ $errors->first('description') }}
+                        {{ $errors->first('description') }}z
                     </p>
                 @endif
                 <p class="helper-block">
@@ -52,4 +52,5 @@
         </form>
     </div>
 </div>
+
 @endsection

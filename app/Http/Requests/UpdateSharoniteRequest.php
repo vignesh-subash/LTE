@@ -15,7 +15,7 @@ class UpdateSharoniteRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => [
+            'empName' => [
                 'required',
             ],
         ];

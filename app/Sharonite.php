@@ -11,14 +11,16 @@ class Sharonite extends Model
     use SoftDeletes;
 
 
-    // public function setDobAttribute($value)
-    // {
-    //     $this->attributes['dob'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
-    //
-    //   //  return \Carbon\Carbon::parse($date)->format('M d, Y');
-    //
-    //   //return Carbon::parse($value)->diffForHumans();
-    // }
+    public function setDobAttribute($value)
+    {
+
+      
+      //  $this->attributes['dob'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+
+      //  return \Carbon\Carbon::parse($date)->format('M d, Y');
+
+      //return Carbon::parse($value)->diffForHumans();
+    }
     //
     public function getDobAttribute($value)
     {
@@ -30,7 +32,7 @@ class Sharonite extends Model
 
 
     protected $dates = [
-      'dob',
+      // 'dob',
       'created_at',
       'updated_at',
       'deleted_at',

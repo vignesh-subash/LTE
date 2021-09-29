@@ -39,6 +39,7 @@
             <div style="width: 33%; float: left; padding-right: 1%;" class="form-group {{ $errors->has('dob') ? 'has-error' : '' }}">
                 <label for="name">{{ trans('global.sharonite.fields.dob') }}*</label>
                 <input type="date" id="dob" name="dob" class="form-control"  value="{{ old('dob', isset($sharonite) ? $sharonite->dob : '') }}" >
+                  <!-- <input type="date" id="dob" name="dob" class="form-control" >{{ old('dob', isset($sharonite) ? $sharonite->dob : '')  }}  -->
                 @if($errors->has('dob'))
                     <p class="help-block">
                         {{ $errors->first('dob') }}
