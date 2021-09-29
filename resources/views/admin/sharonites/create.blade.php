@@ -50,7 +50,7 @@
 
             <div style="width: 33%; float: left;" class="form-group {{ $errors->has('anniversary') ? 'has-error' : '' }}">
                 <label for="name">{{ trans('global.sharonite.fields.anniversary') }}</label>
-                <input type="date" id="anniversary" name="anniversary" class="form-control" placeholder="Anniversary" value="{{ old('anniversary', isset($sharonite) ? $sharonite->anniversary : '') }}">
+                <input type="text" id="anniversary" name="anniversary" class="form-control" placeholder="Anniversary" value="{{ old('anniversary', isset($sharonite) ? $sharonite->anniversary : '') }}">
                 @if($errors->has('anniversary'))
                     <p class="help-block">
                         {{ $errors->first('anniversary') }}

@@ -231,6 +231,8 @@ return [
         'Bugsnag'      => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
+        'Carbon' => 'Carbon\Carbon',
+
     ],
 
 ];

@@ -6,7 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroySharoniteRequest;
 use App\Http\Requests\StoreSharoniteRequest;
 use App\Http\Requests\UpdateSharoniteRequest;
+use App\Http\Requests\ImportSharoniteRequest;
 use App\Sharonite;
+
+use App\Imports\SharonitesImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class SharonitesController extends Controller
@@ -53,6 +57,19 @@ class SharonitesController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Sharonite  $sharonite
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Sharonite $sharonite)
+    {
+        abort_unless(\Gate::allows('sharonite_edit'), 403);
+
+        return view('admin.sharonites.edit', compact('sharonite'));
+    }
+    
+    /**
      * Display the specified resource.
      *
      * @param  \App\Sharonite  $sharonite
@@ -65,18 +82,6 @@ class SharonitesController extends Controller
         return view('admin.sharonites.show', compact('sharonite'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Sharonite  $sharonite
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Sharonite $sharonite)
-    {
-        abort_unless(\Gate::allows('sharonite_edit'), 403);
-
-        return view('admin.sharonites.edit', compact('sharonite'));
-    }
 
     /**
      * Update the specified resource in storage.
@@ -85,7 +90,7 @@ class SharonitesController extends Controller
      * @param  \App\Sharonite  $sharonite
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sharonite $sharonite)
+    public function update(UpdateSharoniteRequest $request, Sharonite $sharonite)
     {
         abort_unless(\Gate::allows('sharonite_edit'), 403);
 
@@ -111,8 +116,19 @@ class SharonitesController extends Controller
 
     public function massDestroy(MassDestroyProductRequest $request)
     {
+
         Sharonite::whereIn('id', request('ids'))->delete();
 
         return response(null, 204);
     }
+
+    public function import(ImportSharoniteRequest $request)
+    {
+      abort_unless(\Gate::allows('sharonite_import'), 403);
+
+      Excel::import(new SharonitesImport, request()->file('select_file')->getRealPath());
+
+      return redirect()->route('admin.sharonites.index');
+    }
+
 }

@@ -29,4 +29,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     Route::resource('sharonites', 'SharonitesController');
 
+    Route::post('sharonites/imports', 'SharonitesController@import')->name('import');
+
 });
