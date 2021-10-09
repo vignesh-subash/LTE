@@ -8,7 +8,8 @@ $(document).ready(function () {
   })
 
   $('.date').datetimepicker({
-    format: 'YYYY-MM-DD',
+    //format: 'YYYY-MM-DD',
+    format: 'DD/MM/YYYY',
     locale: 'en'
   })
 

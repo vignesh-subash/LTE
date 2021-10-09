@@ -11,7 +11,7 @@
             @csrf
             @method('PUT')
             <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                <label for="name">{{ trans('global.sharonite.fields.empName') }}*</label>
+                <label for="name">{{ trans('global.sharonite.fields.empName') }}</label>
                 <input type="text" id="empName" name="empName" class="form-control" value="{{ old('empName', isset($sharonite) ? $sharonite->empName : '') }}">
                 @if($errors->has('empName'))
                     <p class="help-block">
@@ -25,7 +25,8 @@
 
             <div class="form-group {{ $errors->has('designation') ? 'has-error' : '' }}">
                 <label for="name">{{ trans('global.sharonite.fields.designation') }}</label>
-                <input type="text" id="designation" name="designation" class="form-control"  value="{{ old('designation', isset($sharonite) ? $sharonite->designation : '') }}" >
+                <input type="text" id="designation" name="designation" class="form-control"  value="{{ $sharonite->designation }}" >
+                <!-- <input type="text" id="designation" name="designation" class="form-control"  value="{{ old('designation', isset($sharonite) ? $sharonite->designation : '') }}" > -->
                 @if($errors->has('designation'))
                     <p class="help-block">
                         {{ $errors->first('designation') }}
@@ -37,8 +38,11 @@
             </div>
 
             <div style="width: 33%; float: left; padding-right: 1%;" class="form-group {{ $errors->has('dob') ? 'has-error' : '' }}">
-                <label for="name">{{ trans('global.sharonite.fields.dob') }}*</label>
-                <input type="date" id="dob" name="dob" class="form-control"  value="{{ old('dob', isset($sharonite) ? $sharonite->dob : '') }}" >
+                <label for="name">{{ trans('global.sharonite.fields.dob') }}</label>
+
+                <input type="date" id="dob" name="dob" class="form-control"  value="{{ \Carbon\Carbon::createFromFormat('d/m/Y', $sharonite->dob)->format('Y-m-d') }}" >
+                    <!-- <input type="date" id="dob" name="dob" class="form-control"  value="{{ Carbon::createFromFormat('d/m/Y', $sharonite->dob)->format('Y-m-d') }}" >  -->
+                 <!-- <input type="text" id="dob" name="dob" class="form-control"  value="{{ old('dob', isset($sharonite) ? $sharonite->dob : '') }}" > -->
                   <!-- <input type="date" id="dob" name="dob" class="form-control" >{{ old('dob', isset($sharonite) ? $sharonite->dob : '')  }}  -->
                 @if($errors->has('dob'))
                     <p class="help-block">
