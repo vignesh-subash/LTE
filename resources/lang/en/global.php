@@ -3,6 +3,7 @@
 return [
     'add'                                  => 'Add',
     'create'                               => 'Create',
+    'import'                               => 'Import',
     'list'                                 => 'List',
     'show'                                 => 'Show',
     'entries'                              => 'Entries',

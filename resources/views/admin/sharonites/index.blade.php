@@ -7,12 +7,13 @@
             {{ trans('global.add') }} {{ trans('global.sharonite.title_singular') }}
           </a>
         </div>
-        <form action="{{ route("admin.import") }}" method="POST" enctype="multipart/form-data">
+        <form role="form" method="POST" href="{{ route("admin.sharonites.importSharonite") }}" enctype="multipart/form-data">
                 @csrf
                 <input type="file" name="file" class="form-control">
                 <br>
-                <button class="btn btn-success">Import User Data</button>
-
+                <button class="btn btn-success">
+                  {{ trans('global.import') }} {{ trans('global.sharonite.title_singular') }}
+                </button>
         </form>
     </div>
 @endcan

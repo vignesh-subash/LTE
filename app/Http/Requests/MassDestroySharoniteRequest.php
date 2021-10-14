@@ -17,7 +17,7 @@ class MassDestroySharoniteRequest extends FormRequest
     {
         return [
             'ids'   => 'required|array',
-            'ids.*' => 'exists:sharonite,id',
+            'ids.*' => 'exists:sharonites,id',
         ];
     }
 }
