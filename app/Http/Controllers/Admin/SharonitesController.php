@@ -8,9 +8,13 @@ use App\Http\Requests\StoreSharoniteRequest;
 use App\Http\Requests\UpdateSharoniteRequest;
 use App\Http\Requests\ImportSharoniteRequest;
 use App\Sharonite;
+use Excel;
+use File;
+use Seesion;
 
+use DB;
 use App\Imports\SharonitesImport;
-use Maatwebsite\Excel\Facades\Excel;
+//use Maatwebsite\Excel\Facades\Excel;
 
 
 class SharonitesController extends Controller
@@ -122,91 +126,13 @@ class SharonitesController extends Controller
         return response(null, 204);
     }
 
-    //public function importSharonite(ImportSharoniteRequest $request)
-    public function importSharonite(Request $request)
+    public function import()
     {
-    //  abort_unless(\Gate::allows('sharonite_import'), 403);
+      abort_unless(\Gate::allows('sharonite_import'), 403);
+      Excel::import(new SharonitesImport, 'test.xlsx');
+      return redirect('/')->with('success', 'All good!');
 
-    //   $sharonites = Excel::import(new SharonitesImport, $request->file('file'));
-    //
-    //   foreach ($sharonites[0] as $row) {
-    //     // code...
-    //
-    //     $arr[] = [
-    //       'empName' => $row[1],
-    //       'designation' => $row[2],
-    //       'dob' => $row[3],
-    //       'anniversary' => $row[4],
-    //       'bloodGrooup' => $row[5],
-    //       'officeNumber' => $row[6],
-    //       'personalNumber' => $row[7],
-    //       'officeEmail' => $row[8],
-    //       'add1' => $row[9],
-    //       'add2' => $row[10],
-    //       'locality' => $row[11],
-    //       'city' => $row[12],
-    //       'pincode' => $row[13],
-    //       'cp1' => $row[14],
-    //       'relationship1' => $row[15],
-    //       'cd1' => $row[16],
-    //       'cp2' => $row[17],
-    //       'relationship2' => $row[18],
-    //       'cd2' => $row[19],
-    //     ];
-    //   }
-    //
-    //   if(!empty($arr))
-    //   {
-    //     DB::table('sharonites')->insert($arr);
-    //   }
-    //
-    //
-    //
-    //   return redirect()->route('admin.sharonites.index');
-    // }
-
-    $this->validate($request, [
-      'select_file' => 'required|mimes:xls,xlsx'
-    ]);
-
-    $path = $request->file('select_file')->getRealPath();
-
-    $data = Excel::load($path)->get();
-
-    if($data->count() > 0)
-    {
-      foreach($data->toArray() as $key => $value)
-      {
-        foreach($value as $row)
-        {
-          $insert_data[] = array(
-            'empName' => $row['empName'],
-            'designation' => $row['designation'],
-            'dob' => $row['dob'],
-            'anniversary' => $row['anniversary'],
-            'bloodGrooup' => $row['bloodGrooup'],
-            'officeNumber' => $row['officeNumber'],
-            'personalNumber' => $row['personalNumber'],
-            'officeEmail' => $row['officeEmail'],
-            'add1' => $row['add1'],
-            'add2' => $row['add2'],
-            'locality' => $row['locality'],
-            'city' => $row['city'],
-            'pincode' => $row['pincode'],
-            'cp1' => $row['cp1'],
-            'relationship1' => $row['relationship1'],
-            'cd1' => $row['cd1'],
-            'cp2' => $row['cp2'],
-            'relationship2' => $row['relationship2'],
-            'cd2' => $row['cd2'],
-          );
-        }
-      }
-      if(!empty($insert_data))
-      {
-        DB::table('sharonites')->insert($insert_data);
-      }
     }
-    return back()->with('success', 'Excel Data Imported Successfully');
-  }
+
+
 }

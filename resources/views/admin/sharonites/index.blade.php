@@ -7,7 +7,7 @@
             {{ trans('global.add') }} {{ trans('global.sharonite.title_singular') }}
           </a>
         </div>
-        <form role="form" method="POST" href="{{ route("admin.sharonites.importSharonite") }}" enctype="multipart/form-data">
+        <form role="form" method="POST" action="{{ route("admin.sharonites.import") }}" enctype="multipart/form-data">
                 @csrf
                 <input type="file" name="file" class="form-control">
                 <br>
