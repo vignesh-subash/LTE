@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Controllers\Controller;
 use App\Demo;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class DemoController extends Controller
      */
     public function index()
     {
-        //
+        abort_unless(\Gate::allows('demo_access'), 403);
     }
 
     /**

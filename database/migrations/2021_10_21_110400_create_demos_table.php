@@ -43,7 +43,10 @@ class CreateDemosTable extends Migration
             $table->string('website2')->nullable;
             $table->date('birthday')->nullable;
             $table->date('anniversary')->nullable;
-      
+            $table->boolean('refill')->default(false);
+            $table->boolean('newyear')->default(false);
+            $table->boolean('diwali')->default(false);
+            $table->boolean('architectDay')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Salutation;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,11 @@ class SalutationController extends Controller
      */
     public function index()
     {
-        //
+        abort_unless(\Gate::allows('salutation_access'), 403);
+
+        $salutations = Sharonite::all();
+
+        return view('admin.salutations.index', compact('salutations'));
     }
 
     /**
@@ -24,7 +29,9 @@ class SalutationController extends Controller
      */
     public function create()
     {
-        //
+        abort_unless(\Gate::allows('salutation_create'), 403);
+
+        return view('admin.salutations.create');
     }
 
     /**
@@ -35,7 +42,11 @@ class SalutationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        abort_unless(\Gate::allows('salutation_create'), 403);
+
+        $salutation = Salutation::create($request->all());
+
+        return redirect()->route('admin.salutations.index');
     }
 
     /**
@@ -46,7 +57,9 @@ class SalutationController extends Controller
      */
     public function show(Salutation $salutation)
     {
-        //
+        abort_unless(\Gate::allows('sharonite_show'), 403);
+
+        return view('admin.sharonites.show', compact('sharonite'));
     }
 
     /**
@@ -57,7 +70,9 @@ class SalutationController extends Controller
      */
     public function edit(Salutation $salutation)
     {
-        //
+        abort_unless(\Gate::allows('sharonite_edit'), 403);
+
+        return view('admin.sharonites.edit', compact('sharonite'));
     }
 
     /**
@@ -69,7 +84,11 @@ class SalutationController extends Controller
      */
     public function update(Request $request, Salutation $salutation)
     {
-        //
+        abort_unless(\Gate::allows('sharonite_edit'), 403);
+
+        $sharonite->update($request->all());
+
+        return redirect()->route('admin.sharonites.index');
     }
 
     /**
@@ -80,6 +99,10 @@ class SalutationController extends Controller
      */
     public function destroy(Salutation $salutation)
     {
-        //
+        abort_unless(\Gate::allows('sharonite_delete'), 403);
+
+        $sharonite->delete();
+
+        return back();
     }
 }
